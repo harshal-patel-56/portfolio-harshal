@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harshal Portfolio</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+          integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous"/>
+
+    <!-- Update these with your own fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Roboto+Slab:400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .v-application {
+            font-family: none;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none;
+
+        }
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            /* margin-right: -15px; */
+            margin-left: 15px;
+        }
+        .theme--light.v-card .v-card__subtitle, .theme--light.v-card > .v-card__text {
+            color: rgb(78, 78, 78);
+            font-size: 16px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div id="app">
+    <v-app>
+        <v-main>
+            <header>
+                <div class="logo">
+                    &lt; Harshal &gt;
+                </div>
+                <button class="nav-toggle" aria-label="toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
+                        <li class="nav__item"><a href="#services" class="nav__link">My Services</a></li>
+                        <li class="nav__item"><a href="#about" class="nav__link">About me</a></li>
+                        <li class="nav__item"><a href="#work" class="nav__link">My Work</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <!-- Introduction -->
+            <section class="intro" id="home">
+                <h1 class="section__title section__title--intro">
+                    Hi, I am <strong>Harshal Patel</strong>
+                </h1>
+                <p class="section__subtitle section__subtitle--intro">Computer Engineer</p>
+                <img src="img/harshal-profile.jpeg" alt="Harshal Profile" class="intro__img">
+            </section>
+
+
+            <!-- My services -->
+            <section class="my-services container fluid" id="services">
+                <h2 class="section__title section__title--services">Technical Skills</h2>
+                <div class="services row no-gutters justify-content-center">
+                    <div v-for="tech_skill in tech_skills" class="service col-md-4 col-xs-12 px-3 py-3">
+                        <h3 v-text="tech_skill.heading"></h3>
+                        <div class="mt-3">
+                            <v-chip style="color: white" :color="colors[Math.floor(Math.random() * colors.length)]"
+                                    v-for="x in tech_skill.content" class="mx-2 my-2"> {{x}}
+                            </v-chip>
+                        </div>
+                    </div>
+                    <!-- / service -->
+                </div> <!-- / services -->
+                <div>
+                    <template>
+                        <v-row justify="center">
+                            <v-dialog
+                                    v-model="dialog_academics"
+                                    persistent
+                                    max-width="600px"
+                            >
+                                <template v-slot:activator="{ on, attrs }">
+                                    <div :v-bind="attrs" v-on="on" class="btn btn-primary mx-2"><span
+                                            style="color: white">Academics</span></div>
+                                    <a href="#work" class="btn btn-primary mx-2"><span
+                                            style="color: white">My Work</span></a>
+                                </template>
+                                <v-card>
+                                    <v-card-title>
+                                        <span class="headline">Academics</span>
+                                    </v-card-title>
+                                    <v-card-text>
+                                        <v-container>
+                                            <v-row>
+                                                <v-col cols="12">
+                                                    <span class="title">College</span>
+                                                    <v-data-table
+                                                            :headers="headers.academics_college"
+                                                            :items="academics.academics_college"
+                                                            class="elevation-1"
+                                                            :disable-pagination="true"
+                                                            hide-default-footer
+                                                    ></v-data-table>
+                                                </v-col>
+                                            </v-row>
+                                            <v-row>
+                                                <v-col cols="12">
+                                                    <span class="title">School</span>
+                                                    <v-data-table
+                                                            :headers="headers.academics_school"
+                                                            :items="academics.academics_school"
+                                                            class="elevation-1"
+                                                            :disable-pagination="true"
+                                                            hide-default-footer
+                                                    ></v-data-table>
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn
+                                                color="blue darken-1"
+                                                text
+                                                @click="dialog_academics = false"
+                                        >
+                                            Close
+                                        </v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
+                        </v-row>
+                    </template>
+                </div>
+            </section>
+
+            <template>
+                <v-card class="mx-10 my-10">
+                </v-card>
+            </template>
+
+            <!-- About me -->
+            <section class="about-me" id="about">
+                <h2 class="section__title section__title--about"></h2>
+                <h2 class="section__subtitle section__subtitle--about">Career Objective</h2>
+
+                <div class="about-me__body">
+                    <p style="text-indent: 4em">
+                        To pursue a highly rewarding career, seeking for a job in a challenging and healthy work
+                        environment where I can utilize my skills, versatility and knowledge efficiently for
+                        organizational growth.
+                    </p>
+                </div>
+
+                <img src="img/harshal-profile-01.jpg" alt="Jane leaning against a bus" class="about-me__img">
+            </section>
+
+            <!-- My Work -->
+            <section class="my-work" id="work">
+                <h2 class="section__title section__title--work">My work</h2>
+                <p class="section__subtitle section__subtitle--work">A selection of my range of projects</p>
+
+                <div class="container">
+                    <!-- Portfolio item 01 -->
+                    <div class="portfolio__item" v-for="project in projects">
+                        <div class="section__subtitle--intro">
+                            <template>
+                                <v-row justify="center">
+                                    <v-dialog
+                                            v-model="dialog_projet"
+                                            persistent
+                                            max-width="600px"
+                                    >
+                                        <template v-slot:activator="{ on, attrs }">
+
+                                            <v-col sm="11" md="6">
+                                                <v-card :v-bind="attrs" v-on="on" class="portfolio__img px-2 py-2">
+                                                    <v-img
+                                                            height="250"
+                                                            src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                                                    ></v-img>
+                                                    <v-card-text style="font-size: 25px">
+                                                        <strong>{{project.title}}</strong>
+                                                    </v-card-text>
+                                                    <v-card-text>
+                                                        <strong>Role</strong> : &nbsp;<span>{{project.role}}</span>
+                                                    </v-card-text>
+                                                    <v-card-text>
+                                                        <strong>SDLC Pattern</strong> :
+                                                        &nbsp;<span>{{project.sdlc}}</span>
+                                                    </v-card-text>
+                                                    <!--                                                <v-divider class="mx-4"></v-divider>-->
+                                                    <!--                                                <v-card-title><strong>Environment</strong></v-card-title>-->
+                                                    <!--                                                <v-card-text>-->
+                                                    <!--                                                    <v-chip style="color: white"-->
+                                                    <!--                                                            :color="colors[Math.floor(Math.random() * colors.length)]"-->
+                                                    <!--                                                            v-for="x in project.environment" class="mx-1 my-1"> {{x}}-->
+                                                    <!--                                                    </v-chip>-->
+                                                    <!--                                                </v-card-text>-->
+
+                                                </v-card>
+                                            </v-col>
+                                        </template>
+                                        <v-card>
+                                            <v-img
+                                                    height="250"
+                                                    src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                                            ></v-img>
+                                            <v-card-title>
+                                                <strong>{{project.title}}</strong>
+                                            </v-card-title>
+                                            <v-card-title>
+                                                <strong>Team</strong> : &nbsp;<span>{{project.team}}</span>
+                                            </v-card-title>
+                                            <v-card-title>
+                                                <strong>Role</strong> : &nbsp;<span>{{project.role}}</span>
+                                            </v-card-title>
+                                            <v-card-title>
+                                                <strong>SDLC Pattern</strong> : &nbsp;<span>{{project.sdlc}}</span>
+                                            </v-card-title>
+
+                                            <v-divider class="mx-4"></v-divider>
+
+                                            <v-card-title><strong>Description</strong></v-card-title>
+                                            <v-card-text>
+                                                {{project.description}}
+                                            </v-card-text>
+
+                                            <v-card-title><strong>Environment</strong></v-card-title>
+                                            <v-card-text>
+                                                <v-chip style="color: white"
+                                                        :color="colors[Math.floor(Math.random() * colors.length)]"
+                                                        v-for="x in project.environment" class="mx-1 my-1"> {{x}}
+                                                </v-chip>
+                                            </v-card-text>
+
+                                            <v-divider class="mx-4"></v-divider>
+
+                                            <v-card-title><strong>Responsibilities</strong></v-card-title>
+                                            <v-card-text>
+                                                <ul>
+                                                    <li
+                                                            v-for="x in project.responsibilities" class="mx-1 my-1"> {{x}}
+                                                    </li>
+                                                </ul>
+
+                                            </v-card-text>
+
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn
+                                                        color="blue darken-1"
+                                                        text
+                                                        @click="dialog_projet = false"
+                                                >
+                                                    Close
+                                                </v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-dialog>
+                                </v-row>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Footer -->
+            <footer class="footer">
+                <!-- replace with your own email address -->
+                <a href="mailto:hello@jane.dev" class="footer__link">hello@jane.dev</a>
+                <ul class="social-list">
+                    <li class="social-list__item">
+                        <a class="social-list__link" href="https://codepen.io">
+                            <i class="fab fa-codepen"></i>
+                        </a>
+                    </li>
+                    <li class="social-list__item">
+                        <a class="social-list__link" href="http://dribbble.com">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                    </li>
+                    <li class="social-list__item">
+                        <a class="social-list__link" href="https://twitter.com">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="social-list__item">
+                        <a class="social-list__link" href="https://github.com">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </footer>
+        </v-main>
+    </v-app>
+
+</div>
+
+<script src="js/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script>
+    const projects = [
+        {
+            title: "Attendance System using Face Recognition",
+            team: "3 Students - college classmates",
+            role: "Mongo-Flask-VueJS Developer",
+            sdlc: "Waterfall",
+            description: "A full stack web app that interacts with college classroom cameras using Raspberry " +
+                "Pi to take a photograph and then process the same to filter out the faces and mark the attendance." +
+                " The web app hosted on College Server can be accessed by students within the intranet to Confirm " +
+                "their Attendance in real time. With all the necessary privileges faculties can generate an " +
+                "Attendance Report in an organised manner.",
+            responsibilities: [
+                "Involved in all phases of the project from analysis and requirement phase to delivering the project.",
+                "Created System Requirement Specifications (SRS) report of the project by collecting all the requirements from the college.",
+                "Analyzed the requirements and formulated project scope.",
+                "Designed Flowchart and UML of the Project using draw.io.",
+                "A two phase implementation carried out.",
+                "Phase one consists of developing a Machine Learning model for Face Recognition API.",
+                "The FaceNET model was used to Detect and Recognize the faces from a given Image.",
+                "Second phase consists of all the Business Logic of the Web Application and Socket Programming to Access the Raspberry Pi.",
+                "Used Flask Backend with Jinja2 frontend for app development.",
+                "Python support of Raspbian OS to take Photographs from WebCam attached with Pi.",
+                "CV2 package of python used for video streaming and image processing from WebCam.",
+                "Worked with Google Calendar API on frontend to provide attendance of lectures on an hourly basis.",
+                "Used an MySQL database to store Subjects offered and User Information.",
+                "Major involvement of Pandas package to handle CSV files for monthly Attendance report Generation. ",
+                "Socket Programming for Raspberry Pi to transmit images on event driven calls over the Wireless Network or Ethernet as per the connection.",
+                "Full Scale Debugging pattern followed to prompt users with specific messages in case of failure.",
+                "Used Apache Service Engine for creating and deploying Web Service using WSGI.",
+                "Scheduled daily status meetings within the team and also used to communicate the same to the faculties accordingly.",
+                "Resolved bugs/defects in the application by coordinating with team members of the project to assure a positive outcome.",
+            ],
+            environment: ["Windows", " UNIX", " RaspbianOS", " Python3.7", " Flask", " Jinja2", " HTML5", " CSS",
+                " PyCharm", " Git", " Tomcat Web Server", " MySQL"]
+
+        },
+        {
+            title: "Real Estate Website",
+            team: "2 Students",
+            role: "Mongo-Flask-ReactJS developer",
+            sdlc: "Iterative",
+            description: " A real estate website for a real estate dealer at Vadodara. This website features " +
+                "the properties nearby and has functionality of User management, Property Registration, Contact " +
+                "and Admin Page to Approve and Verify the registered properties.",
+            responsibilities: [
+                "Designed Class Diagram of the Project at draw.io.",
+                "MVP Infrastructure followed to implement the Project.",
+                "Initial version used My-SQL as Database but in this iteration we are using MongoDB.",
+                "Microservice based design architecture. Created a JWT based Auth Server that manages user SignUp, Login, Mail notification, and forgot password functionality.",
+                "REST api in flask to provide CRUD functionality for the properties.",
+                "A ReactJS frontend application that uses both the Auth and App server APIs for creating a Minimal User Interface.",
+                "Worked with Material-UI and Axios to develop the React App.",
+                "Created routes and authentication filters for user login session management.",
+                "Clear and concise documentation of the project.",
+                "Full Scale Debugging pattern followed to prompt users with specific messages in case of failure.",
+                "Resolved bugs/defects in the application by looking at documentation and Community Answers at Stackoverflow and other platforms like Medium.",
+            ],
+            environment: ["MongoDB", "Flask", "ReactJS", "PyCharm", " VSCode", "GIT", "MongoDB", "SSO", "JWTAuth"]
+
+        },
+        {
+            title: "Event Registration and Management System",
+            team: "2 Interns",
+            role: "PHP Intern at Sannibh Technologies, Vadodara, Gujarat.",
+            sdlc: "Agile",
+            description: "Event Registration and Management System Project is developed using PHP, CSS, Bootstrap and JavaScript. Here, this simple system contains two major components: Event Registration, and Notification and Report Management. From student login, the student can easily register the upcoming events and its posters and brochures. Once registered the Organisers and Student Volunteers are notified about the event information via mail. After completion of the event, the student volunteers/faculties can upload the Event Report and Keynotes using event ID which will be saved to Server for later use.",
+            responsibilities: [
+                "Involved in all phases of the project from analysis and requirement phase to delivering the project. ",
+                "Created System Requirement Specifications (SRS) report of the project by collecting all the requirements from the client. ",
+                "Analyzed the requirements and formulated project scope. ",
+                "Designed Flowchart and UML of the Project. ",
+                "A Bootstrap front end to provide a functional and clean user interface.",
+                "Whole data pipeline from frontend forms to Database are properly filtered and validated using JavaScript and Ajax.",
+                "PHP5 is used as a backend to meet the CRUD functionality of Events to be Registered. ",
+                "PHPMailer class for automatic mail generation to organisers for event information.",
+                "Configured the SMTP mail Server to avail the Mail Services at application side.",
+                "Normalised database from ER Diagram and hosted it on an PHP-MyAdmin Server for faster indexing.",
+                "Clear and concise documentation of the project.",
+                "Full Scale Debugging pattern followed to prompt users with specific messages in case of failure.",
+                "Scheduled daily status meetings with the SCRUM Master and also used to communicate the same to the client accordingly. ",
+                "Resolved bugs/defects in the application by coordinating with team members of the project to assure a positive outcome."
+            ],
+            environment: ["Windows", "UNIX", "PHP5", "AJAX", "HTML5", "CSS", "VSCode", "Git", "Tomcat Web Server", "PHP-MyAdmin", "PHPMailer"]
+
+        },
+        {
+            title: "To-Do Application",
+            team: "Solo",
+            role: "Flutter Developer",
+            sdlc: "Iterative",
+            description: "A basic To-Do application to get the hands dirty on Flutter technology for cross-platform app development. Integrated the Firebase with the application and performed user management, authentication and CRUD operations on To-Dos created by users. Developed minimal and clean UI for the same.",
+            responsibilities: [
+                "Designed flowchart of application. ",
+                "Designed Class Diagram of the Project. ",
+                "MVP Infrastructure followed to implement the Project.",
+                "Firestore database used to make data of model class Persistent. ",
+                "Provided repo and presenter of model class to implement with View.",
+                "Finally, to implement View I used material design and minimal List View that provides information about To-Do. ",
+                "A swipe gesture based completion and deletion of To-Dos.",
+                "Planning to add Notifications in the next iteration.",
+                "Resolved bugs/defects in the application by looking at documentation and Community Answers at Stackoverflow and other platforms like Medium. "
+            ],
+            environment: [ "Dart", "Flutter", "Firebase", "Firestore", "FirebaseAuth", "Material Design"]
+
+        },
+        {
+            title: "To-Do REST API",
+            team: "Solo under mentorship of kunjan.454pa@gmail.com",
+            role: "SpringBoot REST API developer",
+            sdlc: "Agile",
+            description: "Developed To-Do and User Microservices using Spring-Boot integration with MongoDB and My-SQL databases using industrial level practices and MVC based Design Pattern. Created Tests for each microservices using JUnit. Provided full scale debugging pipeline and required Services.",
+            responsibilities: [
+                "Designed flowchart of application. ",
+                "Designed Class Diagram of the Project. ",
+                "MVP Infrastructure followed to implement the Project.",
+                "MongoDB and My-SQL databases are used to learn the integration with both the databases.",
+                "Provided repo and controller of model class that can be implemented with frontend Application.",
+                "Wrote the tests for each microservices as a part of good practice in REST API development. ",
+                "Tested the API using Postman.",
+                "Planning to add an auth Server and web application in the next version.",
+                "Resolved bugs/defects in the application by looking at documentation and Community Answers at Stackoverflow and with the help of the mentor."
+            ],
+            environment: ["SpringBoot", "MongoDB", "My-SQL", "JUnit", "Intellij IDEA", "Postman", "MAVEN", "Gradle"]
+
+        }
+    ]
+    const tech_skills = [
+        {
+            heading: "Programming Languages",
+            content: ["C", "C++", "JAVA", "Python", "Dart"]
+        },
+        {
+            heading: "Databases",
+            content: ["SQL Server 2012", "MySQL", "MongoDb", "Firestore"]
+        },
+        {
+            heading: "Web Technologies",
+            content: ["JS", "Java", "SpringBoot", "Hibernate", "Servlets", "JSP", "Flask+Jinja2", "php", "ReactJS", "VueJS", "Postman"]
+        },
+        {
+            heading: "Machine Learning Tools",
+            content: ["NumPy", " Pandas", " Matplotlib", " Scikit-Learn", " Seaborn", " TensorFlow", " Keras"]
+        },
+        {
+            heading: "Version Control",
+            content: ["Git", "GitHub"]
+        },
+        {
+            heading: "Documentation Applications",
+            content: ["Google Docs", "Google Sheets", "Draw.io"]
+        }
+    ]
+    const academics_school = [
+        {
+            degree: "B Tech - Bachelor of Technology (CS)",
+            brd_uni: "G.T.U",
+            score: "Pursuing",
+            yop: 2021,
+        },
+        {
+            degree: "H.S.C - SCIENCE",
+            brd_uni: "G.S.E.B",
+            score: "92.00",
+            yop: 2017,
+        },
+        {
+            degree: "S.S.C.",
+            brd_uni: "G.S.E.B",
+            score: "90.83",
+            yop: 2015,
+        },
+    ]
+    const academics_college = [
+        {
+            sem: 6,
+            spi: 9.83,
+            cpi: 9.10,
+            year: "2020-Summer"
+        },
+        {
+            sem: 5,
+            spi: 8.90,
+            cpi: 8.95,
+            year: "2019-Winter"
+        },
+        {
+            sem: 4,
+            spi: 8.50,
+            cpi: 8.96,
+            year: "2019-Summer"
+        },
+        {
+            sem: 3,
+            spi: 8.13,
+            cpi: 9.11,
+            year: "2018-Winter"
+        },
+        {
+            sem: 2,
+            spi: 9.69,
+            cpi: 9.62,
+            year: "2018-Summer"
+        },
+        {
+            sem: 1,
+            spi: 9.55,
+            cpi: 9.55,
+            year: "2017-Winter"
+        },
+
+    ]
+    new Vue({
+        el: '#app',
+        vuetify: new Vuetify({
+            theme: {
+                primary: '#0bb3fd',
+                secondary: '#424242',
+                accent: '#82B1FF',
+                error: '#FF5252',
+                info: '#2196F3',
+                success: '#4CAF50',
+                warning: '#FFC107'
+            }
+        }),
+        data: {
+            dialog_academics: false,
+            dialog_projet: false,
+            colors: ["red", "orange", "green", "blue", "purple"],
+            academics: {
+                academics_college,
+                academics_school
+            },
+            headers: {
+                academics_college: [
+                    {text: 'Semester', value: 'sem',},
+                    {text: 'SPI', value: 'spi'},
+                    {text: 'CPI', value: 'cpi'},
+                    {text: 'Year', value: 'year'},
+                ],
+                academics_school: [
+                    {text: 'Degree', value: 'degree',},
+                    {text: 'Board/University', value: 'brd_uni'},
+                    {text: 'Score (%)', value: 'score',},
+                    {text: 'Year of Passing', value: 'yop'},
+                ]
+            },
+            tech_skills: tech_skills,
+            projects: projects,
+            test: "Hello"
+        }
+    })
+</script>
+</body>
+</html>
