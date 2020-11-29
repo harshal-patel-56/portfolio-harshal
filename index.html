@@ -26,6 +26,7 @@
             scrollbar-width: none;
 
         }
+
         .row {
             display: -ms-flexbox;
             display: flex;
@@ -34,9 +35,15 @@
             /* margin-right: -15px; */
             margin-left: 15px;
         }
+
         .theme--light.v-card .v-card__subtitle, .theme--light.v-card > .v-card__text {
             color: rgb(78, 78, 78);
             font-size: 16px;
+        }
+
+        .v-card__subtitle, .v-card__text {
+            line-height: normal;
+            letter-spacing: .0071428571em;
         }
 
     </style>
@@ -47,19 +54,37 @@
     <v-app>
         <v-main>
             <header>
-                <div class="logo">
-                    &lt; Harshal &gt;
-                </div>
-                <button class="nav-toggle" aria-label="toggle navigation">
-                    <span class="hamburger"></span>
-                </button>
-                <nav class="nav">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
-                        <li class="nav__item"><a href="#services" class="nav__link">My Services</a></li>
-                        <li class="nav__item"><a href="#about" class="nav__link">About me</a></li>
-                        <li class="nav__item"><a href="#work" class="nav__link">My Work</a></li>
-                    </ul>
+                <nav style="width: 100%" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+                    <a class="navbar-brand" href="#">
+                        <div class="logo">
+                            &lt; Harshal &gt;
+                        </div>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse navbar-lg" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto" style="font: 20px 'Roboto Slab', serif">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#home">Home<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#services">Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#about">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#work">Work</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#contact">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
             </header>
 
@@ -178,12 +203,12 @@
 
                 <div class="container">
                     <!-- Portfolio item 01 -->
-                    <div class="portfolio__item" v-for="project in projects">
-                        <div class="section__subtitle--intro">
+                    <div class="" v-for="project in projects">
+                        <div class="" style="font: 20px 'Roboto Slab', serif">
                             <template>
                                 <v-row justify="center">
                                     <v-dialog
-                                            v-model="dialog_projet"
+                                            v-model="dialog_project"
                                             persistent
                                             max-width="600px"
                                     >
@@ -267,7 +292,7 @@
                                                 <v-btn
                                                         color="blue darken-1"
                                                         text
-                                                        @click="dialog_projet = false"
+                                                        @click="dialog_project = false"
                                                 >
                                                     Close
                                                 </v-btn>
@@ -281,33 +306,95 @@
                 </div>
             </section>
 
+            <!-- Certificates -->
+            <section id="certificates">
+                <h2 class="section__title section__title--work text-center">Certificates</h2>
+                <div class="container">
+                    <v-timeline
+                            align-top
+                            :dense="$vuetify.breakpoint.smAndDown"
+                    >
+                        <v-timeline-item
+                                v-for="(item, i) in certificates"
+                                :key="i"
+                                :color="item.color"
+                                :icon="item.icon"
+                                fill-dot
+                        >
+                            <v-card
+                                    :color="item.color"
+                                    dark
+                            >
+                                <v-card-title class="title">
+                                    {{item.title}}
+                                </v-card-title>
+                                <v-card-title class="title">
+                                    <v-chip style="color: black"
+                                            label
+                                            :color="'white'"
+                                            class="mx-1 my-1">By : {{item.provided_by}}
+                                    </v-chip>
+                                    <v-chip style="color: black"
+                                            label
+                                            :color="'white'"
+                                            class="mx-1 my-1">At : {{item.at}}
+                                    </v-chip>
+                                </v-card-title>
+                            </v-card>
+                        </v-timeline-item>
+                    </v-timeline>
+
+                    <div class="text-center"><a style="text-decoration: none"
+                          href="https://drive.google.com/drive/folders/1-jFWQwm1GDTQy5dzqfNr27eEzYw1bL1V?usp=sharing">
+                        <v-btn
+                                :color="'blue'"
+                                class="mx-auto my-3"
+                                outlined
+                        >
+                            Certificates
+                        </v-btn>
+                    </a></div>
+                </div>
+            </section>
 
             <!-- Footer -->
-            <footer class="footer">
+            <footer class="footer" id="contact" style="font: 20px 'Roboto Slab', serif">
                 <!-- replace with your own email address -->
-                <a href="mailto:hello@jane.dev" class="footer__link">hello@jane.dev</a>
-                <ul class="social-list">
-                    <li class="social-list__item">
-                        <a class="social-list__link" href="https://codepen.io">
-                            <i class="fab fa-codepen"></i>
-                        </a>
-                    </li>
-                    <li class="social-list__item">
-                        <a class="social-list__link" href="http://dribbble.com">
-                            <i class="fab fa-dribbble"></i>
-                        </a>
-                    </li>
-                    <li class="social-list__item">
-                        <a class="social-list__link" href="https://twitter.com">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li class="social-list__item">
-                        <a class="social-list__link" href="https://github.com">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </li>
-                </ul>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 justify-content-center text-center">
+                            {{user_info.email}}
+                        </div>
+                        <!--                        <div class="col-12 justify-content-center">-->
+                        <!--                            {{user_info.phone}}-->
+                        <!--                        </div>-->
+                        <!--                        <div class="col-12 justify-content-center">-->
+                        <!--                            {{user_info.address}}-->
+                        <!--                        </div>-->
+                    </div>
+                    <div class="row justify-content-center text-center">
+                        <div class="col-12">
+                            <v-chip label large :color="colors[Math.floor(Math.random() * colors.length)]"
+                                    class="mx-2 my-2">
+                                <v-avtar>
+                                <span style="font-size: 48px; color: white;">
+                                    <i class="fab fa-github mr-2"></i>
+                                </span>
+                                </v-avtar>
+                                <a style="color: white" :href="user_info.github">GitHub</a>
+                            </v-chip>
+                            <v-chip label large :color="colors[Math.floor(Math.random() * colors.length)]"
+                                    class="mx-2 my-2">
+                                <v-avtar>
+                                <span style="font-size: 48px; color: white;">
+                                    <i class="fab fa-linkedin mr-2"></i>
+                                </span>
+                                </v-avtar>
+                                <a style="color: white" :href="user_info.linkedin">LinkedIn</a>
+                            </v-chip>
+                        </div>
+                    </div>
+                </div>
             </footer>
         </v-main>
     </v-app>
@@ -317,6 +404,15 @@
 <script src="js/index.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 <script>
     const projects = [
         {
@@ -420,7 +516,7 @@
                 "Planning to add Notifications in the next iteration.",
                 "Resolved bugs/defects in the application by looking at documentation and Community Answers at Stackoverflow and other platforms like Medium. "
             ],
-            environment: [ "Dart", "Flutter", "Firebase", "Firestore", "FirebaseAuth", "Material Design"]
+            environment: ["Dart", "Flutter", "Firebase", "Firestore", "FirebaseAuth", "Material Design"]
 
         },
         {
@@ -529,6 +625,41 @@
         },
 
     ]
+    const user_info = {
+        email: "hrpatel6699@gmail.com",
+        github: "https://github.com/harshal-patel-56",
+        linkedin: "https://www.linkedin.com/in/harshal-r-patel-716a04193/"
+    }
+    const certificates = [
+        {
+            color: 'red lighten-2',
+            icon: 'mdi-book-variant',
+            title: "Deep Learning Specialization",
+            provided_by: "deeplearning.ai",
+            at: "Coursera"
+        },
+        {
+            color: 'purple darken-1',
+            icon: 'mdi-book-variant',
+            title: "Tensorflow in Practice",
+            provided_by: "deeplearning.ai",
+            at: "Coursera"
+        },
+        {
+            color: 'green lighten-1',
+            icon: 'mdi-book-variant',
+            title: "How Google does Machine Learning",
+            provided_by: "Google Cloud",
+            at: "Coursera"
+        },
+        {
+            color: 'indigo',
+            icon: 'mdi-book-variant',
+            title: "Regex Academy: An Introduction To Text Parsing Sorcery",
+            provided_by: "Mike Limberger",
+            at: "Coursera"
+        },
+    ]
     new Vue({
         el: '#app',
         vuetify: new Vuetify({
@@ -544,7 +675,7 @@
         }),
         data: {
             dialog_academics: false,
-            dialog_projet: false,
+            dialog_project: false,
             colors: ["red", "orange", "green", "blue", "purple"],
             academics: {
                 academics_college,
@@ -566,6 +697,8 @@
             },
             tech_skills: tech_skills,
             projects: projects,
+            user_info: user_info,
+            certificates: certificates,
             test: "Hello"
         }
     })
