@@ -21,10 +21,13 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         .v-application {
-            font-family: Lora Serif;
             -ms-overflow-style: none; /* IE and Edge */
             scrollbar-width: none;
 
+        }
+        .v-application .headline, .v-application .title {
+            line-height: 2rem;
+            font-family: Roboto slab,sans-serif!important;
         }
 
         .row {
@@ -108,7 +111,9 @@
             display: none;
             text-align: center;
         }
-
+        .v-card {
+            font-family: ltc-bodoni-175, serif;
+        }
     </style>
 
 </head>
@@ -116,7 +121,7 @@
 <div id="loader"></div>
 <div style="display: none" id="app" class="animate-bottom">
     <v-app>
-        <v-main >
+        <v-main style="font-family: ltc-bodoni-175, serif;">
             <header class="navbar_header">
                 <nav style="width: 100%;" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
                     <a class="navbar-brand" href="#">
