@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         .v-application {
-            font-family: none;
+            font-family: Lora Serif;
             -ms-overflow-style: none; /* IE and Edge */
             scrollbar-width: none;
 
@@ -116,7 +116,7 @@
 <div id="loader"></div>
 <div style="display: none" id="app" class="animate-bottom">
     <v-app>
-        <v-main>
+        <v-main >
             <header class="navbar_header">
                 <nav style="width: 100%;" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
                     <a class="navbar-brand" href="#">
@@ -319,25 +319,25 @@
                                                                     height="250"
                                                                     src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
                                                             ></v-img>
-                                                            <v-card-title>
+                                                            <v-card-title style="word-break: break-word">
                                                                 <strong>{{project.title}}</strong>
                                                             </v-card-title>
-                                                            <v-card-title>
+                                                            <v-card-title style="word-break: break-word">
                                                                 <strong>Team</strong> :
                                                                 &nbsp;<span>{{project.team}}</span>
                                                             </v-card-title>
-                                                            <v-card-title>
+                                                            <v-card-title style="word-break: break-word">
                                                                 <strong>Role</strong> :
                                                                 &nbsp;<span>{{project.role}}</span>
                                                             </v-card-title>
-                                                            <v-card-title>
+                                                            <v-card-title style="word-break: break-word">
                                                                 <strong>SDLC Pattern</strong> :
                                                                 &nbsp;<span>{{project.sdlc}}</span>
                                                             </v-card-title>
 
                                                             <v-divider class="mx-4"></v-divider>
 
-                                                            <v-card-title><strong>Description</strong></v-card-title>
+                                                            <v-card-title style="word-break: break-word"><strong>Description</strong></v-card-title>
                                                             <v-card-text>
                                                                 {{project.description}}
                                                             </v-card-text>
@@ -409,7 +409,7 @@
                                     :color="item.color"
                                     dark
                             >
-                                <v-card-title class="title">
+                                <v-card-title class="title" style="word-break: break-word">
                                     {{item.title}}
                                 </v-card-title>
                                 <v-card-title class="title">
