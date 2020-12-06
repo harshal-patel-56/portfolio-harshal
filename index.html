@@ -349,7 +349,20 @@
                                                                     <v-img
                                                                             height="250"
                                                                             :src="project.image"
-                                                                    ></v-img>
+                                                                    >
+                                                                        <template v-slot:placeholder>
+                                                                            <v-row
+                                                                                    class="fill-height ma-0"
+                                                                                    align="center"
+                                                                                    justify="center"
+                                                                            >
+                                                                                <v-progress-circular
+                                                                                        indeterminate
+                                                                                        color="grey lighten-5"
+                                                                                ></v-progress-circular>
+                                                                            </v-row>
+                                                                        </template>
+                                                                    </v-img>
                                                                     <v-card-text style="font-size: 25px">
                                                                         <strong>{{project.title}}</strong>
                                                                     </v-card-text>
@@ -368,8 +381,21 @@
                                                         <v-card>
                                                             <v-img
                                                                     height="250"
-                                                                    src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-                                                            ></v-img>
+                                                                    :src="project.image"
+                                                            >
+                                                                <template v-slot:placeholder>
+                                                                    <v-row
+                                                                            class="fill-height ma-0"
+                                                                            align="center"
+                                                                            justify="center"
+                                                                    >
+                                                                        <v-progress-circular
+                                                                                indeterminate
+                                                                                color="grey lighten-5"
+                                                                        ></v-progress-circular>
+                                                                    </v-row>
+                                                                </template>
+                                                            </v-img>
                                                             <v-card-title style="word-break: break-word">
                                                                 <strong>{{project.title}}</strong>
                                                             </v-card-title>
@@ -566,16 +592,20 @@
                                         <v-card-text>
                                             <ul>
                                                 <li>
-                                                    <a href='https://www.freepik.com/vectors/logo'>Logo vector created by freepik - www.freepik.com</a>
+                                                    <a href='https://www.freepik.com/vectors/logo'>Logo vector created
+                                                        by freepik - www.freepik.com</a>
                                                 </li>
                                                 <li>
-                                                    <a href='https://www.freepik.com/vectors/calendar'>Calendar vector created by pch.vector - www.freepik.com</a>
+                                                    <a href='https://www.freepik.com/vectors/calendar'>Calendar vector
+                                                        created by pch.vector - www.freepik.com</a>
                                                 </li>
                                                 <li>
-                                                    <a href='https://www.freepik.com/vectors/business'>Business vector created by rawpixel.com - www.freepik.com</a>
+                                                    <a href='https://www.freepik.com/vectors/business'>Business vector
+                                                        created by rawpixel.com - www.freepik.com</a>
                                                 </li>
                                                 <li>
-                                                    <a href='https://www.freepik.com/vectors/people'>People vector created by pch.vector - www.freepik.com</a>
+                                                    <a href='https://www.freepik.com/vectors/people'>People vector
+                                                        created by pch.vector - www.freepik.com</a>
                                                 </li>
                                             </ul>
 
