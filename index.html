@@ -25,9 +25,10 @@
             scrollbar-width: none;
 
         }
+
         .v-application .headline, .v-application .title {
             line-height: 2rem;
-            font-family: Roboto slab,sans-serif!important;
+            font-family: Roboto slab, sans-serif !important;
         }
 
         .row {
@@ -60,6 +61,7 @@
         .v-dialog:not(.v-dialog--fullscreen) {
             max-height: 80%;
         }
+
         #loader {
             position: absolute;
             left: 50%;
@@ -79,13 +81,21 @@
         }
 
         @-webkit-keyframes spin {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         /* Add animation to "page content" */
@@ -98,19 +108,32 @@
         }
 
         @-webkit-keyframes animatebottom {
-            from { bottom:-100px; opacity:0 }
-            to { bottom:0px; opacity:1 }
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+            to {
+                bottom: 0px;
+                opacity: 1
+            }
         }
 
         @keyframes animatebottom {
-            from{ bottom:-100px; opacity:0 }
-            to{ bottom:0; opacity:1 }
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+            to {
+                bottom: 0;
+                opacity: 1
+            }
         }
 
         #myDiv {
             display: none;
             text-align: center;
         }
+
         .v-card {
             font-family: ltc-bodoni-175, serif;
         }
@@ -265,6 +288,29 @@
                 <img src="img/harshal-profile-01.jpg" alt="Jane leaning against a bus" class="about-me__img">
             </section>
 
+            <!-- Professional Summary -->
+            <section id="professional_work" class="" style="padding: 3em 1em">
+                <div class="container section__title">
+                    <div class="row">
+                        <v-expansion-panels>
+                            <v-expansion-panel>
+                                <v-expansion-panel-header style="background-color: #0bb3fd">
+                                    <h3 class="section__title section__title--work text-center"
+                                        style="font-family: 'Roboto slab', Serif;">Professional Summary</h3>
+                                </v-expansion-panel-header>
+                                <v-expansion-panel-content>
+                                    <ul class="text-left">
+                                        <li class="mx-1 my-1" v-for="skill in professional_summary">
+                                            {{skill}}
+                                        </li>
+                                    </ul>
+                                </v-expansion-panel-content>
+                            </v-expansion-panel>
+                        </v-expansion-panels>
+                    </div>
+                </div>
+            </section>
+
             <!-- My Work -->
             <section class="my-work" id="work">
                 <h2 class="section__title section__title--work">My work</h2>
@@ -302,7 +348,7 @@
                                                                         @click="cycleCarousel = false">
                                                                     <v-img
                                                                             height="250"
-                                                                            src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                                                                            :src="project.image"
                                                                     ></v-img>
                                                                     <v-card-text style="font-size: 25px">
                                                                         <strong>{{project.title}}</strong>
@@ -342,7 +388,8 @@
 
                                                             <v-divider class="mx-4"></v-divider>
 
-                                                            <v-card-title style="word-break: break-word"><strong>Description</strong></v-card-title>
+                                                            <v-card-title style="word-break: break-word"><strong>Description</strong>
+                                                            </v-card-title>
                                                             <v-card-text>
                                                                 {{project.description}}
                                                             </v-card-text>
@@ -445,6 +492,18 @@
                     </a></div>
                 </div>
             </section>
+            <!-- Strengths -->
+            <section class="my-work" id="strengths">
+                <h2 class="section__title section__title--work">Strengths</h2>
+                <div class="container">
+                    <ul class="text-left">
+                        <li
+                                v-for="strength in strengths"
+                                class="mx-1 my-1"> {{strength}}
+                        </li>
+                    </ul>
+                </div>
+            </section>
 
             <!-- Footer -->
             <footer class="footer" id="contact" style="font: 20px 'Roboto Slab', serif">
@@ -483,6 +542,61 @@
                             </v-chip>
                         </div>
                     </div>
+                    <div class="my-3">
+                        <template>
+                            <v-row justify="center">
+                                <v-dialog
+                                        v-model="dialog_attr"
+                                        max-width="600px"
+                                >
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-btn
+                                                color="primary"
+                                                outlined
+                                                v-bind="attrs"
+                                                v-on="on"
+                                        >
+                                            Attributions
+                                        </v-btn>
+                                    </template>
+                                    <v-card>
+                                        <v-card-title class="headline" style="word-break: break-word">
+                                            Attributions to the vector creators
+                                        </v-card-title>
+                                        <v-card-text>
+                                            <ul>
+                                                <li>
+                                                    <a href='https://www.freepik.com/vectors/logo'>Logo vector created by freepik - www.freepik.com</a>
+                                                </li>
+                                                <li>
+                                                    <a href='https://www.freepik.com/vectors/calendar'>Calendar vector created by pch.vector - www.freepik.com</a>
+                                                </li>
+                                                <li>
+                                                    <a href='https://www.freepik.com/vectors/business'>Business vector created by rawpixel.com - www.freepik.com</a>
+                                                </li>
+                                                <li>
+                                                    <a href='https://www.freepik.com/vectors/people'>People vector created by pch.vector - www.freepik.com</a>
+                                                </li>
+                                            </ul>
+
+
+                                        </v-card-text>
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+
+                                            <v-btn
+                                                    color="green darken-1"
+                                                    text
+                                                    @click="dialog_attr = false"
+                                            >
+                                                Close
+                                            </v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
+                            </v-row>
+                        </template>
+                    </div>
                 </div>
             </footer>
         </v-main>
@@ -503,9 +617,11 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script>
+
     const projects = [
         {
             title: "Attendance System using Face Recognition",
+            image: "img/face_recognition-01.jpg",
             dialog: false,
             team: "3 Students - college classmates",
             role: "Mongo-Flask-VueJS Developer",
@@ -542,6 +658,7 @@
         },
         {
             title: "Real Estate Website",
+            image: "img/real_estate-01.jpg",
             dialog: false,
             team: "2 Students",
             role: "Mongo-Flask-ReactJS developer",
@@ -567,6 +684,7 @@
         },
         {
             title: "Event Registration and Management System",
+            image: "img/event_management-01.jpg",
             dialog: false,
             team: "2 Interns",
             role: "PHP Intern at Sannibh Technologies, Vadodara, Gujarat.",
@@ -593,6 +711,7 @@
         },
         {
             title: "To-Do Application",
+            image: "img/to_do-01.jpg",
             dialog: false,
             team: "Solo",
             role: "Flutter Developer",
@@ -614,6 +733,7 @@
         },
         {
             title: "To-Do REST API",
+            image: "img/rest_api-01.jpg",
             dialog: false,
             team: "Solo under mentorship of kunjan.454pa@gmail.com",
             role: "SpringBoot REST API developer",
@@ -719,6 +839,32 @@
         },
 
     ]
+    const professional_summary = [
+        "Excellent designing, architecting, debugging, troubleshooting skills.",
+        "Experience in Python Data Science and Image Processing Tools like NumPy and Pandas.",
+        "Keen interest and knowledge in Deep Learning and its various architectures like CNNs and GANs that are inclined towards image processing and encoding.",
+        "Knowledge of machine algorithms like SVM, Random Forest, Logistic Regression, etc.",
+        "Experience in useful tools of Machine Learning like Tensorflow2.0 and Keras.",
+        "Experience in development and implementation of applications using JAVA, J2EE and Python.",
+        "Experience in J2EE technologies like Spring-boot, Hibernate, Web Services, Design Patterns, SOA, SOAP, MVC, JSP and Servlets.",
+        "Have worked on application servers like Tomcat, Glassfish.",
+        "Strong in databases like SQL Server, MySQL, MongoDB.",
+        "Experience in Web services using RESTFUL API.",
+        "Experience in backend development using Flask, NodeJs and SpringBoot and designing stateful web apps using ReactJs (Material UI) and integration with REST APIs.",
+        "Experience in implementation of SSO, JWT based Auth services in the backend using Flask.",
+        "Worked with development tools like Eclipse, IntelliJ IDEA, PyCharm, Google Colab, Maven and VSCode.",
+        "Experience on AGILE (SCRUM), Iterative and Waterfall SDLC.",
+        "Proficient in Java and Python MultiThreading, Socket programming as well as miniature applets using Java Swing and PyQt.Thorough knowledge and work experience in Native Programming Languages like C/C++, Java and Python.",
+        "Experience in cross platform mobile application development using Flutter and integration with Backend APIs and Firebase.",
+        "Self-motivated and able to work in challenging environments. A team player with good communication and interpersonal skills.",
+        "Ability to learn and adapt quickly to new environments and emerging new technologies."
+    ]
+    const strengths = [
+        "Good listening and comprehension skills and the ability to explain others in the simplest manner possible.",
+        "Quick Thinking and Decision-making abilities.",
+        "Better at Analytical situations and Full of bright ideas.",
+        "Quick Learner with Friendly Nature and Team Player."
+    ]
     const user_info = {
         email: "hrpatel6699@gmail.com",
         github: "https://github.com/harshal-patel-56",
@@ -770,6 +916,7 @@
         data: {
             dialog_academics: false,
             dialog_project: false,
+            dialog_attr: false,
             cycleCarousel: true,
             colors: ["red", "orange", "green", "blue", "purple"],
             academics: {
@@ -794,6 +941,8 @@
             projects: projects,
             user_info: user_info,
             certificates: certificates,
+            strengths: strengths,
+            professional_summary: professional_summary,
             test: "Hello"
         }
     })
